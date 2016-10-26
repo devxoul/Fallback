@@ -1,0 +1,28 @@
+language: objective-c
+osx_image: xcode8
+sudo: false
+rvm:
+  - 2.3
+
+cache:
+  - bundler
+
+env:
+  global:
+    - PROJECT="Fallback.xcodeproj"
+    - IOS_SDK="iphonesimulator10.0"
+    - MACOS_SDK="macosx10.12"
+    - TVOS_SDK="appletvsimulator10.0"
+    - WATCHOS_SDK="watchsimulator3.0"
+  matrix:
+    - SDK="$IOS_SDK"      ACTION="test"
+    - SDK="$MACOS_SDK"    ACTION="test"
+    - SDK="$TVOS_SDK"     ACTION="test"
+    - SDK="$WATCHOS_SDK"  ACTION="build"
+    - SDK="$IOS_SDK"      ACTION="test"
+    - SDK="$MACOS_SDK"    ACTION="test"
+    - SDK="$TVOS_SDK"     ACTION="test"
+    - SDK="$WATCHOS_SDK"  ACTION="build"
+
+script:
+  - xcodebuild clean $ACTION -project "$PROJECT" -scheme "Fallback" -sdk "$SDK" -configuration Release CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | xcpretty -c
