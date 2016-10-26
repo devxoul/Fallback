@@ -1,0 +1,220 @@
+// !$*UTF8*$!
+{
+    archiveVersion = 1;
+    classes = {};
+    objectVersion = 46;
+    rootObject = __RootObject_;
+    objects = {
+        __RootObject_ = {
+            isa = PBXProject;
+            attributes = {LastUpgradeCheck = 9999;};
+            buildConfigurationList = ___RootConfs_;
+            compatibilityVersion = 'Xcode 3.2';
+            developmentRegion = English;
+            hasScannedForEncodings = 0;
+            knownRegions = (en);
+            mainGroup = ___RootGroup_;
+            productRefGroup = ____Products_;
+            projectDirPath = '';
+            projectRoot = '';
+            targets = (______Target_Fallback, ______Target_FallbackTests);
+        };
+        '__PBXFileRef_Package.swift' = {
+            isa = PBXFileReference;
+            lastKnownFileType = sourcecode.swift;
+            path = 'Package.swift';
+            sourceTree = '<group>';
+        };
+        ___RootGroup_ = {
+            isa = PBXGroup;
+            children = ('__PBXFileRef_Package.swift', _____Configs_, _____Sources_,  Dependencies_, _______Tests_, ____Products_);
+            sourceTree = '<group>';
+        };
+        _______Group_Fallback = {
+            isa = PBXGroup;
+            name = 'Fallback';
+            path = 'Sources';
+            sourceTree = '<group>';
+            children = ('__PBXFileRef_Sources/Fallback.swift');
+        };
+        '__PBXFileRef_Sources/Fallback.swift' = {
+            isa = PBXFileReference;
+            lastKnownFileType = sourcecode.swift;
+            path = 'Fallback.swift';
+            sourceTree = '<group>';
+        };
+        ______Target_Fallback = {
+            isa = PBXNativeTarget;
+            buildConfigurationList = _______Confs_Fallback;
+            buildPhases = (CompilePhase_Fallback, ___LinkPhase_Fallback);
+            buildRules = ();
+            dependencies = ();
+            name = 'Fallback';
+            productName = Fallback;
+            productReference = _____Product_Fallback;
+            productType = 'com.apple.product-type.framework';
+        };
+        _____Product_Fallback = {
+            isa = PBXFileReference;
+            explicitFileType = 'wrapper.framework';
+            path = 'Fallback.framework';
+            sourceTree = BUILT_PRODUCTS_DIR;
+        };
+        CompilePhase_Fallback = {
+            isa = PBXSourcesBuildPhase;
+            files = ('__src_cc_ref_Sources/Fallback.swift');
+            runOnlyForDeploymentPostprocessing = 0;
+        };
+        '__src_cc_ref_Sources/Fallback.swift' = {
+            isa = PBXBuildFile;
+            fileRef = '__PBXFileRef_Sources/Fallback.swift';
+        };
+        ___LinkPhase_Fallback = {
+            isa = PBXFrameworksBuildPhase;
+            files = ();
+            runOnlyForDeploymentPostprocessing = 0;
+        };
+        _______Confs_Fallback = {
+            isa = XCConfigurationList;
+            buildConfigurations = (___DebugConf_Fallback, _ReleaseConf_Fallback);
+            defaultConfigurationIsVisible = 0;
+            defaultConfigurationName = Debug;
+        };
+        ___DebugConf_Fallback = {
+            isa = XCBuildConfiguration;
+            buildSettings = { SWIFT_VERSION = '3.0'; LD_RUNPATH_SEARCH_PATHS = '$(TOOLCHAIN_DIR)/usr/lib/swift/macosx'; PRODUCT_MODULE_NAME = '$(TARGET_NAME:c99extidentifier)'; ENABLE_TESTABILITY = 'YES'; OTHER_SWIFT_FLAGS = '$(inherited)'; INFOPLIST_FILE = 'Fallback.xcodeproj/Fallback_Info.plist'; FRAMEWORK_SEARCH_PATHS = '$(PLATFORM_DIR)/Developer/Library/Frameworks'; SWIFT_OPTIMIZATION_LEVEL = '-Onone'; PRODUCT_BUNDLE_IDENTIFIER = 'Fallback'; PRODUCT_NAME = '$(TARGET_NAME:c99extidentifier)'; OTHER_LDFLAGS = '$(inherited)'; };
+            name = Debug;
+        };
+        _ReleaseConf_Fallback = {
+            isa = XCBuildConfiguration;
+            buildSettings = { SWIFT_VERSION = '3.0'; LD_RUNPATH_SEARCH_PATHS = '$(TOOLCHAIN_DIR)/usr/lib/swift/macosx'; PRODUCT_MODULE_NAME = '$(TARGET_NAME:c99extidentifier)'; ENABLE_TESTABILITY = 'YES'; OTHER_SWIFT_FLAGS = '$(inherited)'; INFOPLIST_FILE = 'Fallback.xcodeproj/Fallback_Info.plist'; FRAMEWORK_SEARCH_PATHS = '$(PLATFORM_DIR)/Developer/Library/Frameworks'; PRODUCT_BUNDLE_IDENTIFIER = 'Fallback'; PRODUCT_NAME = '$(TARGET_NAME:c99extidentifier)'; OTHER_LDFLAGS = '$(inherited)'; };
+            name = Release;
+        };
+        __Dependency_Fallback = {
+            isa = PBXTargetDependency;
+            target = ______Target_Fallback;
+        };
+        _______Group_FallbackTests = {
+            isa = PBXGroup;
+            name = 'FallbackTests';
+            path = 'Tests/FallbackTests';
+            sourceTree = '<group>';
+            children = ('__PBXFileRef_Tests/FallbackTests/FallbackTests.swift');
+        };
+        '__PBXFileRef_Tests/FallbackTests/FallbackTests.swift' = {
+            isa = PBXFileReference;
+            lastKnownFileType = sourcecode.swift;
+            path = 'FallbackTests.swift';
+            sourceTree = '<group>';
+        };
+        ______Target_FallbackTests = {
+            isa = PBXNativeTarget;
+            buildConfigurationList = _______Confs_FallbackTests;
+            buildPhases = (CompilePhase_FallbackTests, ___LinkPhase_FallbackTests);
+            buildRules = ();
+            dependencies = (__Dependency_Fallback);
+            name = 'FallbackTests';
+            productName = FallbackTests;
+            productReference = _____Product_FallbackTests;
+            productType = 'com.apple.product-type.bundle.unit-test';
+        };
+        _____Product_FallbackTests = {
+            isa = PBXFileReference;
+            explicitFileType = 'compiled.mach-o.wrapper.cfbundle';
+            path = 'FallbackTests.xctest';
+            sourceTree = BUILT_PRODUCTS_DIR;
+        };
+        CompilePhase_FallbackTests = {
+            isa = PBXSourcesBuildPhase;
+            files = ('__src_cc_ref_Tests/FallbackTests/FallbackTests.swift');
+            runOnlyForDeploymentPostprocessing = 0;
+        };
+        '__src_cc_ref_Tests/FallbackTests/FallbackTests.swift' = {
+            isa = PBXBuildFile;
+            fileRef = '__PBXFileRef_Tests/FallbackTests/FallbackTests.swift';
+        };
+        ___LinkPhase_FallbackTests = {
+            isa = PBXFrameworksBuildPhase;
+            files = (_LinkFileRef_Fallback_via_FallbackTests);
+            runOnlyForDeploymentPostprocessing = 0;
+        };
+        _LinkFileRef_Fallback_via_FallbackTests = {
+            isa = PBXBuildFile;
+            fileRef = _____Product_Fallback;
+        };
+        _______Confs_FallbackTests = {
+            isa = XCConfigurationList;
+            buildConfigurations = (___DebugConf_FallbackTests, _ReleaseConf_FallbackTests);
+            defaultConfigurationIsVisible = 0;
+            defaultConfigurationName = Debug;
+        };
+        ___DebugConf_FallbackTests = {
+            isa = XCBuildConfiguration;
+            buildSettings = { LD_RUNPATH_SEARCH_PATHS = '@loader_path/../Frameworks'; FRAMEWORK_SEARCH_PATHS = '$(PLATFORM_DIR)/Developer/Library/Frameworks'; OTHER_SWIFT_FLAGS = '$(inherited)'; INFOPLIST_FILE = 'Fallback.xcodeproj/FallbackTests_Info.plist'; SWIFT_OPTIMIZATION_LEVEL = '-Onone'; EMBEDDED_CONTENT_CONTAINS_SWIFT = 'YES'; OTHER_LDFLAGS = '$(inherited)'; SWIFT_VERSION = '3.0'; };
+            name = Debug;
+        };
+        _ReleaseConf_FallbackTests = {
+            isa = XCBuildConfiguration;
+            buildSettings = { LD_RUNPATH_SEARCH_PATHS = '@loader_path/../Frameworks'; FRAMEWORK_SEARCH_PATHS = '$(PLATFORM_DIR)/Developer/Library/Frameworks'; OTHER_SWIFT_FLAGS = '$(inherited)'; INFOPLIST_FILE = 'Fallback.xcodeproj/FallbackTests_Info.plist'; EMBEDDED_CONTENT_CONTAINS_SWIFT = 'YES'; OTHER_LDFLAGS = '$(inherited)'; SWIFT_VERSION = '3.0'; };
+            name = Release;
+        };
+        __Dependency_FallbackTests = {
+            isa = PBXTargetDependency;
+            target = ______Target_FallbackTests;
+        };
+        '__PBXFileRef_Fallback.xcodeproj/Configs/Project.xcconfig' = {
+            isa = PBXFileReference;
+            lastKnownFileType = text.xcconfig;
+            path = 'Fallback.xcodeproj/Configs/Project.xcconfig';
+            sourceTree = '<group>';
+        };
+        _____Configs_ = {
+            isa = PBXGroup;
+            children = ('__PBXFileRef_Fallback.xcodeproj/Configs/Project.xcconfig');
+            name = Configs;
+            sourceTree = '<group>';
+        };
+        _____Sources_ = {
+            isa = PBXGroup;
+            children = (_______Group_Fallback);
+            name = Sources;
+            sourceTree = '<group>';
+        };
+        _______Tests_ = {
+            isa = PBXGroup;
+            children = (_______Group_FallbackTests);
+            name = Tests;
+            sourceTree = '<group>';
+        };
+       TestProducts_ = {
+            isa = PBXGroup;
+            children = (_____Product_FallbackTests);
+            name = Tests;
+            sourceTree = '<group>';
+        };
+        ____Products_ = {
+            isa = PBXGroup;
+            children = (TestProducts_, _____Product_Fallback);
+            name = Products;
+            sourceTree = '<group>';
+        };
+        _______Debug_ = {
+            isa = XCBuildConfiguration;
+            baseConfigurationReference = '__PBXFileRef_Fallback.xcodeproj/Configs/Project.xcconfig';
+            buildSettings = {};
+            name = Debug;
+        };
+        _____Release_ = {
+            isa = XCBuildConfiguration;
+            baseConfigurationReference = '__PBXFileRef_Fallback.xcodeproj/Configs/Project.xcconfig';
+            buildSettings = {};
+            name = Release;
+        };
+        ___RootConfs_ = {
+            isa = XCConfigurationList;
+            buildConfigurations = (_______Debug_, _____Release_);
+            defaultConfigurationIsVisible = 0;
+            defaultConfigurationName = Debug;
+        };
+    };
+}
