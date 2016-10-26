@@ -20,6 +20,36 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+/// Flattens do-try-catch expressions.
+///
+/// For example:
+///
+/// ```
+/// value = try fallback(
+///   try get("A"),
+///   try get("B"),
+///   try get("C"),
+///   try get("D")
+/// )
+/// ```
+///
+/// is equivalent to:
+///
+/// ```swift
+/// do {
+///   value = try get("A")
+/// } catch {
+///   do {
+///     value = try get("B")
+///   } catch {
+///     do {
+///       value = try get("C")
+///     } catch {
+///       value = try get("D")
+///     }
+///   }
+/// }
+/// ```
 public func fallback<T>(
   _ closure: (@autoclosure () throws -> T),
   _ closures: (@autoclosure () throws -> T)...
