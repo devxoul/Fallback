@@ -27,7 +27,7 @@ public func fallback<T>(
   do {
     return try closure()
   } catch(let error) {
-    for i in 0..<closures.count {
+    for i in closures.indices {
       do {
         return try closures[i]()
       } catch(let error) {
