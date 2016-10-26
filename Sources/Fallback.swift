@@ -89,3 +89,50 @@ public func fallback<T>(
     throw error
   }
 }
+
+public enum Tryable<T> {
+  case success(T)
+  case failure(Error)
+
+  public func `catch`(_ closure: @escaping (Error) throws -> T) -> Tryable<T> {
+    switch self {
+    case .success:
+      return self
+
+    case .failure(let error):
+      do {
+        return .success(try closure(error))
+      } catch (let error) {
+        return .failure(error)
+      }
+    }
+  }
+
+  public func rethrow() throws -> T {
+    switch self {
+    case .success(let value):
+      return value
+
+    case .failure(let error):
+      throw error
+    }
+  }
+
+  public func finally(_ closure: @escaping (Error) -> T) -> T {
+    switch self {
+    case .success(let value):
+      return value
+
+    case .failure(let error):
+      return closure(error)
+    }
+  }
+}
+
+public func fallback<T>(_ closure: () throws -> T) -> Tryable<T> {
+  do {
+    return .success(try closure())
+  } catch (let error) {
+    return .failure(error)
+  }
+}
