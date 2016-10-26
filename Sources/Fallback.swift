@@ -53,15 +53,35 @@
 public func fallback<T>(
   _ closure: (@autoclosure () throws -> T),
   _ closures: (@autoclosure () throws -> T)...
-) throws -> T {
+) rethrows -> T {
   do {
     return try closure()
-  } catch(let error) {
+  } catch (let error) {
     for i in closures.indices {
       do {
         return try closures[i]()
       } catch(let error) {
-        if i == closures.indices.upperBound {
+        if i == closures.indices.last {
+          throw error
+        }
+      }
+    }
+    throw error
+  }
+}
+
+public func fallback<T>(
+  _ closure: (() throws -> T),
+  _ closures: (() throws -> T)...
+) rethrows -> T {
+  do {
+    return try closure()
+  } catch (let error) {
+    for i in closures.indices {
+      do {
+        return try closures[i]()
+      } catch(let error) {
+        if i == closures.indices.last {
           throw error
         }
       }

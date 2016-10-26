@@ -14,6 +14,9 @@ final class FallbackTests: XCTestCase {
     return [
       ("testFallback_throws", testFallback_throws),
       ("testFallback", testFallback),
+      ("testFallbackClosure_throws", testFallbackClosure_throws),
+      ("testFallbackClosure", testFallbackClosure),
+      ("testFallbackClosure_defaultValue", testFallbackClosure_defaultValue),
     ]
   }
 
@@ -128,6 +131,126 @@ final class FallbackTests: XCTestCase {
         try get("devxoul1", throws: true),
         try get("devxoul2", throws: true),
         try get("devxoul3", throws: false)
+      ),
+      "devxoul3"
+    )
+  }
+
+  func testFallbackClosure_throws() {
+    XCTAssertThrowsError(
+      try fallback(
+        { try get("devxoul1", throws: true) }
+      ) as String
+    )
+    XCTAssertThrowsError(
+      try fallback(
+        { try get("devxoul1", throws: true) },
+        { try get("devxoul2", throws: true) }
+      ) as String
+    )
+    XCTAssertThrowsError(
+      try fallback(
+        { try get("devxoul1", throws: true) },
+        { try get("devxoul2", throws: true) },
+        { try get("devxoul3", throws: true) }
+      ) as String
+    )
+  }
+
+  func testFallbackClosure() {
+    XCTAssertEqual(
+      try fallback(
+        { try get("devxoul1", throws: false) }
+      ),
+      "devxoul1"
+    )
+
+    XCTAssertEqual(
+      try fallback(
+        { try get("devxoul1", throws: false) },
+        { try get("devxoul2", throws: false) }
+      ),
+      "devxoul1"
+    )
+    XCTAssertEqual(
+      try fallback(
+        { try get("devxoul1", throws: false) },
+        { try get("devxoul2", throws: true) }
+      ),
+      "devxoul1"
+    )
+    XCTAssertEqual(
+      try fallback(
+        { try get("devxoul1", throws: true) },
+        { try get("devxoul2", throws: false) }
+      ),
+      "devxoul2"
+    )
+
+    XCTAssertEqual(
+      try fallback(
+        { try get("devxoul1", throws: false) },
+        { try get("devxoul2", throws: false) },
+        { try get("devxoul3", throws: false) }
+      ),
+      "devxoul1"
+    )
+    XCTAssertEqual(
+      try fallback(
+        { try get("devxoul1", throws: true) },
+        { try get("devxoul2", throws: false) },
+        { try get("devxoul3", throws: false) }
+      ),
+      "devxoul2"
+    )
+    XCTAssertEqual(
+      try fallback(
+        { try get("devxoul1", throws: false) },
+        { try get("devxoul2", throws: true) },
+        { try get("devxoul3", throws: false) }
+      ),
+      "devxoul1"
+    )
+    XCTAssertEqual(
+      try fallback(
+        { try get("devxoul1", throws: false) },
+        { try get("devxoul2", throws: false) },
+        { try get("devxoul3", throws: true) }
+      ),
+      "devxoul1"
+    )
+    XCTAssertEqual(
+      try fallback(
+        { try get("devxoul1", throws: true) },
+        { try get("devxoul2", throws: false) },
+        { try get("devxoul3", throws: true) }
+      ),
+      "devxoul2"
+    )
+    XCTAssertEqual(
+      try fallback(
+        { try get("devxoul1", throws: false) },
+        { try get("devxoul2", throws: true) },
+        { try get("devxoul3", throws: true) }
+      ),
+      "devxoul1"
+    )
+    XCTAssertEqual(
+      try fallback(
+        { try get("devxoul1", throws: true) },
+        { try get("devxoul2", throws: true) },
+        { try get("devxoul3", throws: false) }
+      ),
+      "devxoul3"
+    )
+  }
+
+  func testFallbackClosure_defaultValue() {
+    XCTAssertEqual(
+      try fallback(
+        { try get("devxoul1", throws: true) },
+        { try get("devxoul2", throws: true) },
+        { return "devxoul3" }
       ),
       "devxoul3"
     )
