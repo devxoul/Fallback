@@ -42,13 +42,13 @@ do {
 - **Using [CocoaPods](https://cocoapods.org)**:
 
     ```ruby
-    pod 'Fallback', '~> 0.1'
+    pod 'Fallback', '~> 0.2'
     ```
 
 - **Using [Carthage](https://github.com/Carthage/Carthage)**:
 
     ```
-    github "devxoul/Fallback" ~> 0.1
+    github "devxoul/Fallback" ~> 0.2
     ```
 
 - **Using [Swift Package Manager](https://swift.org/package-manager)**:

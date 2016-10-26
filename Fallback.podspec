@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'Fallback'
-  s.version          = '0.1.0'
+  s.version          = '0.2.0'
   s.summary          = 'Syntactic sugar for Swift do-try-catch'
   s.homepage         = 'https://github.com/devxoul/Fallback'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
