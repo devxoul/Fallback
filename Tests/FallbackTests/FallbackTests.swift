@@ -8,6 +8,13 @@ struct TestError<T>: Error {
   }
 }
 
+func get<T>(_ value: T, throws: Bool) throws -> T {
+  if `throws` {
+    throw TestError(value)
+  }
+  return value
+}
+
 final class FallbackTests: XCTestCase {
 
   static var allTests: [(String, (FallbackTests) -> () throws -> Void)] {
@@ -18,13 +25,6 @@ final class FallbackTests: XCTestCase {
       ("testFallbackClosure", testFallbackClosure),
       ("testFallbackClosure_defaultValue", testFallbackClosure_defaultValue),
     ]
-  }
-
-  func get<T>(_ value: T, throws: Bool) throws -> T {
-    if `throws` {
-      throw TestError(value)
-    }
-    return value
   }
 
   func testFallback_throws() {
@@ -253,6 +253,177 @@ final class FallbackTests: XCTestCase {
         { return "devxoul3" }
       ),
       "devxoul3"
+    )
+  }
+
+  func testFallbackTryableRethrow_throws() {
+    XCTAssertThrowsError(
+      try fallback {
+        return try get("a", throws: true)
+      }.rethrow()
+    )
+    XCTAssertThrowsError(
+      try fallback {
+        return try get("a", throws: true)
+      }.catch { error in
+        return try get("b", throws: true)
+      }.rethrow()
+    )
+    XCTAssertThrowsError(
+      try fallback {
+        return try get("a", throws: true)
+      }.catch { error in
+        return try get("b", throws: true)
+      }.catch { error in
+        return try get("c", throws: true)
+      }.rethrow()
+    )
+  }
+
+  func testFallbackTryableRethrow() {
+    XCTAssertEqual(
+      try fallback {
+        return try get("a", throws: false)
+      }.rethrow(),
+      "a"
+    )
+
+    XCTAssertEqual(
+      try fallback {
+        return try get("a", throws: false)
+      }.catch { error in
+        return try get("b", throws: true)
+      }.rethrow(),
+      "a"
+    )
+    XCTAssertEqual(
+      try fallback {
+        return try get("a", throws: false)
+      }.catch { error in
+        return try get("b", throws: false)
+      }.rethrow(),
+      "a"
+    )
+
+    XCTAssertEqual(
+      try fallback {
+        return try get("a", throws: false)
+      }.catch { error in
+        return try get("b", throws: true)
+      }.catch { error in
+        return try get("c", throws: true)
+      }.rethrow(),
+      "a"
+    )
+    XCTAssertEqual(
+      try fallback {
+        return try get("a", throws: false)
+      }.catch { error in
+        return try get("b", throws: false)
+      }.catch { error in
+        return try get("c", throws: true)
+      }.rethrow(),
+      "a"
+    )
+    XCTAssertEqual(
+      try fallback {
+        return try get("a", throws: false)
+      }.catch { error in
+        return try get("b", throws: false)
+      }.catch { error in
+        return try get("c", throws: false)
+      }.rethrow(),
+      "a"
+    )
+    XCTAssertEqual(
+      try fallback {
+        return try get("a", throws: true)
+      }.catch { error in
+        return try get("b", throws: false)
+      }.catch { error in
+        return try get("c", throws: false)
+      }.rethrow(),
+      "b"
+    )
+    XCTAssertEqual(
+      try fallback {
+        return try get("a", throws: true)
+      }.catch { error in
+        return try get("b", throws: true)
+      }.catch { error in
+        return try get("c", throws: false)
+      }.rethrow(),
+      "c"
+    )
+  }
+
+  func testFallbackTryableFinally() {
+    XCTAssertEqual(
+      fallback {
+        return try get("a", throws: true)
+      }.finally { error in
+        return "none"
+      },
+      "none"
+    )
+    XCTAssertEqual(
+      fallback {
+        return try get("a", throws: true)
+      }.catch { error in
+        return try get("b", throws: true)
+      }.finally { error in
+        return "none"
+      },
+      "none"
+    )
+    XCTAssertEqual(
+      fallback {
+        return try get("a", throws: true)
+      }.catch { error in
+        return try get("b", throws: true)
+      }.catch { error in
+        return try get("c", throws: true)
+      }.finally { error in
+        return "none"
+      },
+      "none"
+    )
+
+    XCTAssertEqual(
+      fallback {
+        return try get("a", throws: false)
+      }.catch { error in
+        return try get("b", throws: true)
+      }.catch { error in
+        return try get("c", throws: true)
+      }.finally { error in
+        return "none"
+      },
+      "a"
+    )
+    XCTAssertEqual(
+      fallback {
+        return try get("a", throws: false)
+      }.catch { error in
+        return try get("b", throws: false)
+      }.catch { error in
+        return try get("c", throws: true)
+      }.finally { error in
+        return "none"
+      },
+      "a"
+    )
+    XCTAssertEqual(
+      fallback {
+        return try get("a", throws: true)
+      }.catch { error in
+        return try get("b", throws: false)
+      }.catch { error in
+        return try get("c", throws: false)
+      }.finally { error in
+        return "none"
+      },
+      "b"
     )
   }
 
